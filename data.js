@@ -313,6 +313,7 @@ const SUFFIX_DATA = [
   { term: "-id", betydelse: "ämnesnamn; kemiska föreningar" },
   { term: "-ifer", betydelse: "bärande" },
   { term: "-ik", betydelse: "vetenskap, lära, konst" },
+  { term: "-iker", betydelse: "person som lider av ett tillstånd" },
   { term: "-ing", betydelse: "handling, tillstånd" },
   { term: "-isera", betydelse: "göra till, omvandla" },
   { term: "-isk", betydelse: "tillhörande" },
