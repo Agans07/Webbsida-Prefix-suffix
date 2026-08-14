@@ -5,7 +5,6 @@
     [...PREFIX_DATA, ...SUFFIX_DATA].map(({ term, betydelse }) => [term, betydelse])
   );
   const wordBlock = document.getElementById("wordBlock");
-  const stepIndicator = document.getElementById("stepIndicator");
   const splitPreview = document.getElementById("splitPreview");
   const questionText = document.getElementById("questionText");
   const optionsEl = document.getElementById("quizOptions");
@@ -28,14 +27,8 @@
     return result;
   }
 
-  function questionPool(){
-    return WORD_DATA.flatMap(word => ["prefix", "suffix"]
-      .filter(kind => word[kind])
-      .map(kind => ({ word, kind, affix: word[kind] })));
-  }
-
   function newOrder(){
-    state.order = shuffle(questionPool());
+    state.order = shuffle(WORD_DATA);
     state.pos = 0;
   }
 
@@ -64,11 +57,10 @@
     return element.innerHTML;
   }
 
-  function preview(question){
-    const { word, kind, affix } = question;
-    if (kind === "prefix") return `<span class="hit">${escapeHTML(affix.text)}</span>${escapeHTML(word.ord.slice(affix.text.length))}`;
-    const cut = word.ord.length - affix.text.length;
-    return `${escapeHTML(word.ord.slice(0, cut))}<span class="hit">${escapeHTML(affix.text)}</span>`;
+  function preview(word, kind, text){
+    if (kind === "prefix") return `<span class="hit">${escapeHTML(text)}</span>${escapeHTML(word.ord.slice(text.length))}`;
+    const cut = word.ord.length - text.length;
+    return `${escapeHTML(word.ord.slice(0, cut))}<span class="hit">${escapeHTML(text)}</span>`;
   }
 
   function loadQuestion(){
@@ -80,10 +72,9 @@
     splitPreview.innerHTML = "&nbsp;";
     nextBtn.style.display = "none";
 
-    const { word, kind, affix } = state.current;
+    const word = state.current;
     wordBlock.textContent = word.ord;
-    stepIndicator.textContent = kind === "prefix" ? "Prefix" : "Suffix";
-    questionText.textContent = kind === "prefix" ? "Vilken del av ordet är prefixet?" : "Vilken del av ordet är suffixet?";
+    questionText.textContent = "Vilken del av ordet är ett prefix eller suffix?";
     const options = [
       ...fragmentOptions(word.ord, word.prefix?.text || distractorText(word.ord, true), true),
       ...fragmentOptions(word.ord, word.suffix?.text || distractorText(word.ord, false), false)
@@ -104,16 +95,18 @@
     if (state.answered) return;
     state.answered = true;
     state.total++;
-    const { kind, affix } = state.current;
-    const isCorrect = option.kind === kind && option.text.toLowerCase() === affix.text.toLowerCase();
+    const word = state.current;
+    const matchedAffix = option.kind === "prefix" && word.prefix && option.text.toLowerCase() === word.prefix.text.toLowerCase() ? word.prefix
+      : option.kind === "suffix" && word.suffix && option.text.toLowerCase() === word.suffix.text.toLowerCase() ? word.suffix
+      : null;
     document.querySelectorAll(".option-btn").forEach(candidate => { candidate.disabled = true; });
-    if (isCorrect){
+    if (matchedAffix){
       state.score++;
       state.streak++;
       button.classList.add("correct");
       feedbackEl.innerHTML = '<span class="stamp ratt">Rätt!</span>';
-      splitPreview.innerHTML = preview(state.current);
-      meaningBox.innerHTML = `<div class="meaning-box"><b>${escapeHTML(affix.term)}</b> — ${escapeHTML(MEANING_MAP[affix.term] || "")}</div>`;
+      splitPreview.innerHTML = preview(word, option.kind, matchedAffix.text);
+      meaningBox.innerHTML = `<div class="meaning-box"><b>${escapeHTML(matchedAffix.term)}</b> — ${escapeHTML(MEANING_MAP[matchedAffix.term] || "")}</div>`;
     } else {
       state.streak = 0;
       button.classList.add("wrong");
