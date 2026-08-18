@@ -1,0 +1,238 @@
+Prefix,Motsatt betydelse
+A- / An-,"Bejakande, bekräftande"
+Ab- / Abs-,"Till, emot"
+Ad- / Af- / Ak-,"Från, bort"
+Akro- / Acro-,"Botten, djupt ned"
+Allo-,"Samma, egen"
+Ambi- / Ambo-,"En, enkel"
+Amfi-,"Ensidigt, i mitten"
+Ana-,"Ned, bort"
+Andro-,"Kvinna, kvinnlig (Gyno-)"
+Aniso-,"Lika, jämn"
+Ante-,Efter
+Anti-,"För, med"
+Apo-,"Till, intill"
+Arke- / Arch-,"Ny, ung, underordnad"
+Auto-,"Yttre, annan"
+Av-,"Till, upp, på"
+Baro-,"Vakuum, viktlöshet"
+Be-,"Ta ifrån, beröva"
+Beni-,"Ond, fientlig"
+Benth- / Bento-,"Yta, atmosfär"
+Bi-,"Enkel, en; huvud-"
+Bio-,"Död, livlös"
+Brady-,Snabb
+Cis-,"På andra sidan, bortom"
+Co- / Ko-,"Ensam, enskild"
+Cyber-,"Fysisk, verklig"
+De- / Des-,"Till-, upp-, i-"
+Di-,Enkel
+Dia-,"Runtom, ihop"
+Dif-,"Ihop, samman-"
+Dis-,"Ihop, väl, god"
+Dys-,"Väl-, god-"
+Ego-,"Andra, omgivningen"
+Ek-,In
+Eko-,"Oekologisk, miljöfarlig"
+Ekvi-,"Ojämn, olika"
+Em- / En-,"Ut, ta ur"
+Endo-,"Yttre, utvärtes"
+Epi-,"Under, före"
+Ergo-,"Vila, fritids-"
+Eu-,"Dålig, ful, miss-"
+Ex- / E-,Nuvarande; in-
+Exo-,"Inuti, inre"
+Extra-,"Innanför, inom"
+Fil-,"Fiende till, avsky"
+Fono-,Tystnad
+Foto-,Mörker
+Fysio-,"Själs-, sinnes- (Psyk-)"
+Fyto- / Phyto-,Djur (Zoo-)
+För-,Till; gagna; bakom
+Gen-,Bryta ned; med
+Geo-,"Rymd, sky"
+Glyko-,"Bitter, sur"
+Gyno- / Gynek-,"Man, manlig (Andro-)"
+Hagio-,"Profanhet, synd"
+Hemi-,Hel
+Hetero-,"Lika, samma"
+Holo-,"Partiell, ofullständig"
+Homo-,Olik
+Hydro-,"Torr, kaktus- (Xero-)"
+Hygro-,Torka
+Hyper-,Under
+Hypno-,Vakenhet
+Hypo-,"Över, i överkant"
+Idio-,"Allmän, gemensam"
+Il- / Im- / In- / Ir-,"Ja, bejakande; ut ur"
+Immuno-,"Mottaglig, oskyddad"
+Infra-,"Ovantill-, över-"
+Inter-,Inom (Intra-)
+Intra-,Utanför (Extra-)
+Intro-,Utåt (Extro-)
+Iso-,"Olika, varierad"
+Kardinal-,"Biprodukt, underordnad"
+Kata-,Upp (Ana-)
+Kon- / Koll- / Kom- / Korr-,"Sär-, isär-"
+Kontra-,"För, med"
+Kromo-,"Färg lös, genomskinlig"
+Kron- / Chrono-,Tidlöshet
+Kryo- / Cryo-,"Värme, eld (Termo-, Pyro-)"
+Krypto-,"Öppen, synlig"
+Kvasi-,"Äkta, verklig"
+Makro-,Liten
+Mal-,"God, väl"
+Maxi-,"Lägst, minst (Mini-)"
+Mega- / Megalo-,"Mikro-, liten"
+Meso-,"Ytterkant, extremitet"
+Meta-,"Grundläggande, lägre nivå"
+Mid-,"Kant, extremitet"
+Mikro-,Stor
+Mikrobio-,Makroorganismer
+Mini-,I stort format (Maxi-)
+Miso-,"Vän, kärlek (Fil-)"
+Miss- / Mis-,"Rätt, korrekt"
+Mono-,"Många, flera"
+Morf- / Morfo-,Formlöshet
+Multi-,"En-, få-"
+Nekro-,"Levande, livs-"
+Neo-,"Gammal, forn (Paleo-)"
+Nokt- / Nykt-,Dag
+Non-,"Ja, bejakande"
+O-,"Ja, bejakande"
+Ob- / Op-,"Med, till förmån för"
+Oligo-,Många
+Omni-,"Ingen, enstaka"
+Onko-,Frisk vävnad
+Opto-,"Mörker, blindhet"
+Orto-,"Fel, sned"
+Osteo-,Mjukvävnad
+Paleo-,"Ny, modern (Neo-)"
+Palin-,"Framåt, första gången"
+Pan-,"Inget, enskilt"
+Para-,"I centrum, huvud-"
+Pato-,"Friskhet, hälsa"
+Ped-,"Vuxen, åldring"
+Per-,"Runtom, stoppad"
+Peri-,"I mitten, centrum"
+Plio- / Pleio-,"Mindre, färre"
+Poly-,"En, få"
+Post-,"Före, pre-"
+Pre-,"Efter, post-"
+Presby-,Ungdoms-
+Pro-,"Mot, anti-"
+Proto-,"Sista, slutgiltiga"
+Pseudo-,"Äkta, sant"
+Psyk-,Kropps- (Fysio-)
+Pyro-,"Is, kyla (Kryo-)"
+Re-,"Framåt, första gången"
+Retro-,Framåt
+Sam-,"Särskild, enskild"
+Se-,"Fram, till"
+Sem- / Semi-,Hel
+Socio-,"Individuell, enskild"
+Soma- / Somato-,"Själ, sinne"
+Sub-,Över
+Super-,"Under, otillräcklig"
+Sym-,"Sär-, ifrån"
+Syn-,Isär
+Tachy-,Långsam (Brady-)
+Tauto-,"Olik, annan"
+Tele-,Nära
+Teleo-,"Slump, utan mål"
+Teo-,"Ateistisk, världslig"
+Termo-,Kyla
+Topo-,Platslöshet
+Trans-,På denna sida (Cis-)
+Ultra-,Måttfull; på denna sida
+Under-,"Ovanför, överdriven"
+Uni-,Många
+Van-,"Rätt, god"
+Veder-,Med-
+Xeno-,"Inhemsk, känd"
+Xero-,"Fuktig, våt (Hydro-)"
+Zoo-,Växt (Fyto-)
+Ärke-,"Underordnad, lägst"
+Över-,"För lite, nedanför"
+
+Suffix,Motsatt betydelse
+-abel,Omöjlig att
+-acitet,"Oförmåga, oförmögenhet"
+-aktig,"Olika, olik"
+-al,"Ovidkommande, fristående"
+-algi,"Smärtfrihet, lindring"
+-ande,"Passivitet, stiltje"
+-ant,Passiv mottagare
+-are,Passiv mottagare
+-arki,"Anarki, styrelselöshet"
+-artad,Olik
+-bar,Omöjlighet
+-bios,Död
+-centrisk,"Perifer, utanför centrum"
+-cid,"Livgivande, skapande"
+-dera,"Tillsammans, i grupp"
+-ell,Ovidkommande
+-ende,Passivitet
+-erik,Frisk person
+-es,"Stagnation, tillstånd"
+-fag / -fagi,"Fastande, svältande"
+-fil,"Hatare, avsky (-fob)"
+-fili,"Avsky, rädsla (-fobi)"
+-fob,"Vän, älskare (-fil)"
+-fobi,"Kärlek, dragning (-fili)"
+-fon,Tystnad
+-full,"Tom på, saknar (-lös)"
+-för,Oförmögen
+-gen,"Förebyggande, nedbrytande"
+-geni,"Avveckling, nedbrytning (-lys)"
+-graf,"Läsa, radera"
+-haltig,"Fri från, ren"
+-ibel,Omöjlig att
+-ifer,"Utan, saknar"
+-ik,"Praktik, utövande"
+-iker,Frisk person
+-ing,Passivitet
+-isera,"Återställa, bevara"
+-isk,Ovidkommande
+-ist,Motståndare
+-it,"Läkning, friskhet"
+-iv,"Passiv, motvillig"
+-ivor,Fastande
+-krati,"Anarki, maktlöshet"
+-ledes,På annat sätt
+-lig,"Olik, utan egenskap av"
+-log,"Lekman, okunnig"
+-logi,Ovetenskaplighet
+-lys,"Bildande, skapande (-geni)"
+-lös,"Fylld av, riklig på (-full, -rik)"
+-mani,"Besinning, kontroll"
+-ment,"Orsak, grund"
+-mässig,"Bristfällig, undermålig"
+-naut,Hemmasittare
+-ning,Passivitet
+-nom,Lekman
+-nomi,"Kaos, oordning"
+-oid,"Olik, äkta"
+-om,Frisk vävnad
+-or,Mottagare
+-os,"Hälsa, friskhet"
+-pat,Frisk person
+-pati,"Hälsa, känslolöshet"
+-ped,Vanvård
+-pedi,Vanvård
+-plast,"Stel, oformbar"
+-polis,Landsbygd
+-rik,"Fattig på, utan (-lös)"
+-sofi,"Dårskap, ignorantism"
+-som,På annat sätt
+-stomi,"Slutning, hopsyning"
+-tek,Spridning
+-tion,"Passivitet, uteblivet resultat"
+-tiv,"Passiv, oförmögen"
+-tomi,Hopsyning
+-trofi,"Tynande, torkning (Atrofi)"
+-typ,"Avvikelse, mönsterlöshet"
+-urgi,Passivitet
+-vor,Fastande
+-är,Ovidkommande
+-ör,Mottagare
