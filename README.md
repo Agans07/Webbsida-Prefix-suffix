@@ -19,6 +19,17 @@ quiz-word.js                ← logik för quiz-word.html
 
 Öppna `index.html` i webbläsaren. Fungerar direkt utan server.
 
+## Välja affix till quiz
+
+På sidan **Bläddra i lexikonet** väljer du vilka affix som ska användas i
+båda quiz. Kryssa i eller ur varje affix, använd knapparna för att aktivera
+eller inaktivera alla, eller välj en viss bokstav och kategori, exempelvis
+`A prefix` eller `A suffix`.
+
+Valen sparas lokalt i webbläsaren på den aktuella enheten. Första gången är
+alla affix aktiva. Om alla inaktiveras visar quizsidorna ett meddelande tills
+du väljer affix igen.
+
 ## Quiz 2: Bygg isär ordet
 
 Du får ett riktigt svenskt ord. Frågan ber dig slumpmässigt hitta antingen

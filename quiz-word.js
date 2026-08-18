@@ -15,8 +15,28 @@
   const qScoreEl = document.getElementById("qScore");
   const qTotalEl = document.getElementById("qTotal");
   const qStreakEl = document.getElementById("qStreak");
+  const SELECTION_STORAGE_KEY = "affix_selectedTerms";
+  const allKeys = new Set([
+    ...PREFIX_DATA.map(item => itemKey({ ...item, kategori: "prefix" })),
+    ...SUFFIX_DATA.map(item => itemKey({ ...item, kategori: "suffix" }))
+  ]);
+  const selectedKeys = loadSelectedKeys();
 
   const state = { order: [], pos: 0, round: 1, score: 0, total: 0, streak: 0, current: null, answered: false };
+
+  function itemKey(item){ return item.kategori + "::" + item.term; }
+
+  function loadSelectedKeys(){
+    const stored = localStorage.getItem(SELECTION_STORAGE_KEY);
+    if (stored === null) return new Set(allKeys);
+    try {
+      const keys = JSON.parse(stored);
+      if (!Array.isArray(keys)) return new Set(allKeys);
+      return new Set(keys.filter(key => allKeys.has(key)));
+    } catch {
+      return new Set(allKeys);
+    }
+  }
 
   function shuffle(items){
     const result = items.slice();
@@ -28,7 +48,16 @@
   }
 
   function newOrder(){
-    state.order = shuffle(WORD_DATA);
+    const targets = [];
+    WORD_DATA.forEach(word => {
+      if (word.prefix && selectedKeys.has(itemKey({ kategori: "prefix", term: word.prefix.term }))){
+        targets.push({ word, kind: "prefix", affix: word.prefix });
+      }
+      if (word.suffix && selectedKeys.has(itemKey({ kategori: "suffix", term: word.suffix.term }))){
+        targets.push({ word, kind: "suffix", affix: word.suffix });
+      }
+    });
+    state.order = shuffle(targets);
     state.pos = 0;
   }
 
@@ -65,6 +94,10 @@
 
   function loadQuestion(){
     if (state.pos >= state.order.length) newOrder();
+    if (state.order.length === 0){
+      showEmptyState();
+      return;
+    }
     state.current = state.order[state.pos];
     state.answered = false;
     feedbackEl.innerHTML = "";
@@ -72,12 +105,12 @@
     splitPreview.innerHTML = "&nbsp;";
     nextBtn.style.display = "none";
 
-    const word = state.current;
+    const word = state.current.word;
     wordBlock.textContent = word.ord;
-    questionText.textContent = "Vilken del av ordet är ett prefix eller suffix?";
+    questionText.textContent = "Vilken del av ordet är ett " + state.current.kind + "?";
     const options = [
-      ...fragmentOptions(word.ord, word.prefix?.text || distractorText(word.ord, true), true),
-      ...fragmentOptions(word.ord, word.suffix?.text || distractorText(word.ord, false), false)
+      ...fragmentOptions(word.ord, state.current.kind === "prefix" ? state.current.affix.text : distractorText(word.ord, true), true),
+      ...fragmentOptions(word.ord, state.current.kind === "suffix" ? state.current.affix.text : distractorText(word.ord, false), false)
     ];
     optionsEl.innerHTML = "";
     options.forEach(option => {
@@ -91,14 +124,26 @@
     updateStats();
   }
 
+  function showEmptyState(){
+    state.current = null;
+    state.answered = true;
+    wordBlock.textContent = "—";
+    splitPreview.innerHTML = "&nbsp;";
+    questionText.textContent = "Inga affix valda";
+    optionsEl.innerHTML = "";
+    feedbackEl.innerHTML = '<p class="quiz-empty-note">Det finns inga aktiva affix med ordexempel. <a href="browse.html">Välj affix i lexikonet.</a></p>';
+    meaningBox.innerHTML = "";
+    nextBtn.style.display = "none";
+    updateStats();
+  }
+
   function answer(button, option){
     if (state.answered) return;
     state.answered = true;
     state.total++;
-    const word = state.current;
-    const matchedAffix = option.kind === "prefix" && word.prefix && option.text.toLowerCase() === word.prefix.text.toLowerCase() ? word.prefix
-      : option.kind === "suffix" && word.suffix && option.text.toLowerCase() === word.suffix.text.toLowerCase() ? word.suffix
-      : null;
+    const word = state.current.word;
+    const target = state.current;
+    const matchedAffix = option.kind === target.kind && option.text.toLowerCase() === target.affix.text.toLowerCase() ? target.affix : null;
     document.querySelectorAll(".option-btn").forEach(candidate => { candidate.disabled = true; });
     if (matchedAffix){
       state.score++;

@@ -16,6 +16,9 @@
   const qScoreEl = document.getElementById("qScore");
   const qTotalEl = document.getElementById("qTotal");
   const qStreakEl = document.getElementById("qStreak");
+  const SELECTION_STORAGE_KEY = "affix_selectedTerms";
+  const allKeys = new Set(ALL_ITEMS.map(itemKey));
+  const selectedKeys = loadSelectedKeys();
 
   const quizState = {
     cat: "alla",
@@ -28,8 +31,24 @@
     answered: false
   };
 
+  function itemKey(item){ return item.kategori + "::" + item.term; }
+
+  function loadSelectedKeys(){
+    const stored = localStorage.getItem(SELECTION_STORAGE_KEY);
+    if (stored === null) return new Set(allKeys);
+    try {
+      const keys = JSON.parse(stored);
+      if (!Array.isArray(keys)) return new Set(allKeys);
+      return new Set(keys.filter(key => allKeys.has(key)));
+    } catch {
+      return new Set(allKeys);
+    }
+  }
+
   function pool(){
-    return quizState.cat === "alla" ? ALL_ITEMS : ALL_ITEMS.filter(i => i.kategori === quizState.cat);
+    return ALL_ITEMS.filter(item =>
+      selectedKeys.has(itemKey(item)) && (quizState.cat === "alla" || item.kategori === quizState.cat)
+    );
   }
 
   function shuffle(arr){
@@ -62,6 +81,10 @@
   }
 
   function newQuestion(){
+    if (pool().length === 0){
+      showEmptyState();
+      return;
+    }
     quizState.current = buildQuestion();
     quizState.answered = false;
     quizFeedbackEl.innerHTML = "";
@@ -82,6 +105,19 @@
     });
 
     qNumEl.textContent = quizState.qNum;
+    updateStats();
+  }
+
+  function showEmptyState(){
+    quizState.current = null;
+    quizState.answered = true;
+    quizTermEl.textContent = "—";
+    quizTermEl.className = "term-block";
+    quizTermEl.dataset.kat = "";
+    quizKatLabel.textContent = "Inga affix valda";
+    quizOptionsEl.innerHTML = "";
+    quizFeedbackEl.innerHTML = '<p class="quiz-empty-note">Det finns inga aktiva affix för detta quizval. <a href="browse.html">Välj affix i lexikonet.</a></p>';
+    nextBtn.style.display = "none";
     updateStats();
   }
 
