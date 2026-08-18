@@ -25,6 +25,14 @@
       <button class="chip" data-cat="suffix">Suffix</button>
     </div>
   </div>
+  <section class="selection-panel" aria-label="Välj affix till quiz">
+    <div class="selection-actions">
+      <button class="chip selection-button" id="enableAllBtn" type="button">Aktivera alla</button>
+      <button class="chip selection-button" id="disableAllBtn" type="button">Inaktivera alla</button>
+      <p class="selection-status" id="selectionStatus" aria-live="polite"></p>
+    </div>
+    <div class="selection-by-letter" id="selectionByLetter" aria-label="Välj affix efter bokstav och kategori"></div>
+  </section>
   <p class="result-count" id="resultCount"></p>
   <div class="term-grid" id="termGrid"></div>
 </section>
