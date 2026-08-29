@@ -27,7 +27,13 @@
     <div class="word-block" id="wordBlock">…</div>
     <p class="split-preview" id="splitPreview"></p>
     <p class="question-text" id="questionText">Vilken del av ordet är ett prefix eller suffix?</p>
-    <div class="options" id="quizOptions"></div>
+    <form class="answer-form" id="answerForm">
+      <label class="answer-label" id="answerLabel" for="answerInput">Skriv affixet</label>
+      <div class="answer-controls">
+        <input class="answer-input" id="answerInput" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+        <button class="answer-submit" type="submit">Svara</button>
+      </div>
+    </form>
     <div id="quizFeedback"></div>
     <div id="meaningBox"></div>
     <button class="next-btn" id="nextBtn" style="display:none;">Nästa →</button>

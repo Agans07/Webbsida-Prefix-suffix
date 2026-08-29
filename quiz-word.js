@@ -7,7 +7,10 @@
   const wordBlock = document.getElementById("wordBlock");
   const splitPreview = document.getElementById("splitPreview");
   const questionText = document.getElementById("questionText");
-  const optionsEl = document.getElementById("quizOptions");
+  const answerForm = document.getElementById("answerForm");
+  const answerLabel = document.getElementById("answerLabel");
+  const answerInput = document.getElementById("answerInput");
+  const answerSubmit = answerForm.querySelector("button[type=submit]");
   const feedbackEl = document.getElementById("quizFeedback");
   const meaningBox = document.getElementById("meaningBox");
   const nextBtn = document.getElementById("nextBtn");
@@ -61,25 +64,6 @@
     state.pos = 0;
   }
 
-  function fragmentOptions(word, correctText, fromStart){
-    const maxLength = word.length - 1;
-    const lengths = new Set([correctText.length]);
-    for (const offset of [-1, 1, -2, 2, -3, 3]){
-      const length = correctText.length + offset;
-      if (length >= 1 && length <= maxLength) lengths.add(length);
-      if (lengths.size === 3) break;
-    }
-    for (let length = 1; lengths.size < 3 && length <= maxLength; length++) lengths.add(length);
-    return shuffle([...lengths].slice(0, 3)).map(length => ({
-      text: fromStart ? word.slice(0, length) : word.slice(-length),
-      kind: fromStart ? "prefix" : "suffix"
-    }));
-  }
-
-  function distractorText(word, fromStart){
-    return fromStart ? word.slice(0, 1) : word.slice(-1);
-  }
-
   function escapeHTML(text){
     const element = document.createElement("div");
     element.textContent = text;
@@ -104,24 +88,19 @@
     meaningBox.innerHTML = "";
     splitPreview.innerHTML = "&nbsp;";
     nextBtn.style.display = "none";
+    answerForm.style.display = "block";
+    answerInput.disabled = false;
+    answerSubmit.disabled = false;
+    answerInput.value = "";
 
     const word = state.current.word;
     wordBlock.textContent = word.ord;
     questionText.textContent = "Vilken del av ordet är ett " + state.current.kind + "?";
-    const options = [
-      ...fragmentOptions(word.ord, state.current.kind === "prefix" ? state.current.affix.text : distractorText(word.ord, true), true),
-      ...fragmentOptions(word.ord, state.current.kind === "suffix" ? state.current.affix.text : distractorText(word.ord, false), false)
-    ];
-    optionsEl.innerHTML = "";
-    options.forEach(option => {
-      const button = document.createElement("button");
-      button.className = `option-btn affix-option ${option.kind}`;
-      button.textContent = option.kind === "prefix" ? `${option.text}-` : `-${option.text}`;
-      button.addEventListener("click", () => answer(button, option));
-      optionsEl.appendChild(button);
-    });
+    answerLabel.textContent = "Skriv " + state.current.kind + "et";
+    answerInput.placeholder = state.current.kind === "prefix" ? "Exempel: auto-" : "Exempel: -grafi";
     qNumEl.textContent = state.round;
     updateStats();
+    answerInput.focus();
   }
 
   function showEmptyState(){
@@ -130,31 +109,34 @@
     wordBlock.textContent = "—";
     splitPreview.innerHTML = "&nbsp;";
     questionText.textContent = "Inga affix valda";
-    optionsEl.innerHTML = "";
+    answerForm.style.display = "none";
     feedbackEl.innerHTML = '<p class="quiz-empty-note">Det finns inga aktiva affix med ordexempel. <a href="browse.html">Välj affix i lexikonet.</a></p>';
     meaningBox.innerHTML = "";
     nextBtn.style.display = "none";
     updateStats();
   }
 
-  function answer(button, option){
+  function normalizedAffix(text){
+    return text.trim().toLowerCase().replace(/^-+|-+$/g, "");
+  }
+
+  function answer(chosen){
     if (state.answered) return;
     state.answered = true;
     state.total++;
     const word = state.current.word;
     const target = state.current;
-    const matchedAffix = option.kind === target.kind && option.text.toLowerCase() === target.affix.text.toLowerCase() ? target.affix : null;
-    document.querySelectorAll(".option-btn").forEach(candidate => { candidate.disabled = true; });
+    const matchedAffix = normalizedAffix(chosen) === normalizedAffix(target.affix.text) ? target.affix : null;
+    answerInput.disabled = true;
+    answerSubmit.disabled = true;
     if (matchedAffix){
       state.score++;
       state.streak++;
-      button.classList.add("correct");
       feedbackEl.innerHTML = '<span class="stamp ratt">Rätt!</span>';
-      splitPreview.innerHTML = preview(word, option.kind, matchedAffix.text);
+      splitPreview.innerHTML = preview(word, target.kind, matchedAffix.text);
       meaningBox.innerHTML = `<div class="meaning-box"><b>${escapeHTML(matchedAffix.term)}</b> — ${escapeHTML(MEANING_MAP[matchedAffix.term] || "")}</div>`;
     } else {
       state.streak = 0;
-      button.classList.add("wrong");
       feedbackEl.innerHTML = '<span class="stamp fel">Fel</span>';
     }
     updateStats();
@@ -173,6 +155,13 @@
     state.pos++;
     state.round++;
     loadQuestion();
+  });
+
+  answerForm.addEventListener("submit", event => {
+    event.preventDefault();
+    const chosen = answerInput.value.trim();
+    if (!chosen || state.answered) return;
+    answer(chosen);
   });
 
   newOrder();
