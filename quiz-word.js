@@ -53,12 +53,14 @@
   function newOrder(){
     const targets = [];
     WORD_DATA.forEach(word => {
+      const candidates = [];
       if (word.prefix && selectedKeys.has(itemKey({ kategori: "prefix", term: word.prefix.term }))){
-        targets.push({ word, kind: "prefix", affix: word.prefix });
+        candidates.push({ kind: "prefix", affix: word.prefix });
       }
       if (word.suffix && selectedKeys.has(itemKey({ kategori: "suffix", term: word.suffix.term }))){
-        targets.push({ word, kind: "suffix", affix: word.suffix });
+        candidates.push({ kind: "suffix", affix: word.suffix });
       }
+      if (candidates.length) targets.push({ word, candidates });
     });
     state.order = shuffle(targets);
     state.pos = 0;
@@ -94,10 +96,18 @@
     answerInput.value = "";
 
     const word = state.current.word;
+    const candidates = state.current.candidates;
     wordBlock.textContent = word.ord;
-    questionText.textContent = "Vilken del av ordet är ett " + state.current.kind + "?";
-    answerLabel.textContent = "Skriv " + state.current.kind + "et";
-    answerInput.placeholder = state.current.kind === "prefix" ? "Exempel: auto-" : "Exempel: -grafi";
+    if (candidates.length === 2){
+      questionText.textContent = "Vilken del av ordet är ett prefix eller suffix?";
+      answerLabel.textContent = "Skriv ett affix";
+      answerInput.placeholder = "Exempel: auto- eller -grafi";
+    } else {
+      const kind = candidates[0].kind;
+      questionText.textContent = "Vilken del av ordet är ett " + kind + "?";
+      answerLabel.textContent = "Skriv " + kind + "et";
+      answerInput.placeholder = kind === "prefix" ? "Exempel: auto-" : "Exempel: -grafi";
+    }
     qNumEl.textContent = state.round;
     updateStats();
     answerInput.focus();
@@ -126,15 +136,18 @@
     state.total++;
     const word = state.current.word;
     const target = state.current;
-    const matchedAffix = normalizedAffix(chosen) === normalizedAffix(target.affix.text) ? target.affix : null;
+    const matchedCandidate = target.candidates.find(candidate =>
+      normalizedAffix(chosen) === normalizedAffix(candidate.affix.text)
+    );
     answerInput.disabled = true;
     answerSubmit.disabled = true;
-    if (matchedAffix){
+    if (matchedCandidate){
+      const { kind, affix } = matchedCandidate;
       state.score++;
       state.streak++;
       feedbackEl.innerHTML = '<span class="stamp ratt">Rätt!</span>';
-      splitPreview.innerHTML = preview(word, target.kind, matchedAffix.text);
-      meaningBox.innerHTML = `<div class="meaning-box"><b>${escapeHTML(matchedAffix.term)}</b> — ${escapeHTML(MEANING_MAP[matchedAffix.term] || "")}</div>`;
+      splitPreview.innerHTML = preview(word, kind, affix.text);
+      meaningBox.innerHTML = `<div class="meaning-box"><b>${escapeHTML(affix.term)}</b> — ${escapeHTML(MEANING_MAP[affix.term] || "")}</div>`;
     } else {
       state.streak = 0;
       feedbackEl.innerHTML = '<span class="stamp fel">Fel</span>';
