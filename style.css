@@ -32,6 +32,12 @@ body{
   font-family:var(--serif-body);
   min-height:100vh;
 }
+.word-quiz-page{
+  background-color:#0F141A;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.025), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.01) 0 1px, transparent 1px 3px);
+}
 
 a{color:inherit;}
 
