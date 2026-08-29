@@ -437,7 +437,7 @@ a{color:inherit;}
   font-family:var(--serif-body);
   font-size:1.1rem;
   color:var(--cream);
-  background:var(--bed-alt);
+  background:var(--bed);
   border:1px solid var(--bed-line);
   border-radius:var(--radius);
   padding:.85rem 1.1rem;
@@ -570,7 +570,7 @@ a{color:inherit;}
 .meaning-box{
   margin:1.2rem auto 0;
   max-width:480px;
-  background:var(--bed-alt);
+  background:var(--bed);
   border:1px solid var(--bed-line);
   border-radius:var(--radius);
   padding:.9rem 1.1rem;
