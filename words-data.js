@@ -1187,8 +1187,8 @@ const WORD_DATA = [
 	{ ord: "antropofagi", suffix: { term: "-fag / -fagi", text: "fagi" } },
 
 	// -fili (top-up)
-	{ ord: "bibliofili", suffix: { term: "-fili", text: "fili" } },
-	{ ord: "anglofili", suffix: { term: "-fili", text: "fili" } },
+	{ ord: "bibliofili", prefix: { term: "Biblio-", text: "biblio" }, suffix: { term: "-fili", text: "fili" } },
+	{ ord: "anglofili", prefix: { term: "Anglo-", text: "anglo" }, suffix: { term: "-fili", text: "fili" } },
 
 	// -fob (top-up)
 	{ ord: "xenofob", suffix: { term: "-fob", text: "fob" } },
